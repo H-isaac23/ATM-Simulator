@@ -116,7 +116,7 @@ class BankAccount{
             System.out.println();
         }
         
-        System.out.print("Thanks for using the app!");
+        System.out.println("Thanks for using the app!");
     }
     
 }
