@@ -16,7 +16,7 @@ public class BankingAppSimulation {
      */
     public static void main(String[] args) {
         
-        Scanner cs = new Scanner(System.in);
+        /*Scanner cs = new Scanner(System.in);
         System.out.print("Please tell us your name: ");
         String name = cs.next();
         System.out.println();
@@ -117,6 +117,11 @@ class BankAccount{
         }
         
         System.out.println("Thanks for using the app!");
+        * 
+        * 
+        */
+        
+        bankGUI gui = new bankGUI();
     }
     
 }
