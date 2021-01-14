@@ -1,30 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bankingappsimulation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
-/**
- *
- * @author ISAAC
- */
 public class bankGUI extends JFrame implements ActionListener {
-    
-    public ArrayList<String> field = new ArrayList<String>();
+	
     main_buttons bal_button, withdraw, prev_transac_button, deposit, quit, back;
     JTextField curr_bal;
     JLabel curr_bal_label;
-    Double balance = 0.00;
-    keypad_deposit pad;
-	
+    keypad pad;
+
     public bankGUI(){
 
         int width = 700, height = 700;
-		
+
         // set container for buttons
         JPanel button_cont = new JPanel();
         button_cont.setLayout(null);
@@ -80,11 +70,11 @@ public class bankGUI extends JFrame implements ActionListener {
         curr_bal.setEditable(false);
         curr_bal.setBounds(50, 100, 300, 75);
         curr_bal.setVisible(false);
-        curr_bal.setText("Php " + String.format("%.2f", balance));
+        curr_bal.setText("Php " + String.format("%.2f", bal.amt));
         curr_bal.setFont(new Font("Arial", Font.PLAIN, 20));
 
         // make a j-panel for depositing
-        pad = new keypad_deposit(field);
+        pad = new keypad(this.back);
         pad.setVisible(false);
 
 
@@ -109,11 +99,11 @@ public class bankGUI extends JFrame implements ActionListener {
         button_cont.add(curr_bal_label);
         button_cont.add(back);
         button_cont.add(pad);
-}
+    }
 
-@Override
-public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+    @Override
+    public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
         bal_button.setVisible(false);
         withdraw.setVisible(false);
         deposit.setVisible(false);
@@ -122,11 +112,13 @@ public void actionPerformed(ActionEvent e) {
         back.setVisible(true);
 
         if(e.getSource() == bal_button) {
+            String amt = String.format("%.2f", bal.amt);
+            curr_bal.setText("Php " + amt);
             curr_bal.setVisible(true);
             curr_bal_label.setVisible(true);
         }
         if(e.getSource() == back) {
-            
+
             pad.field_text = "";
             pad.deposit_field.setText(pad.field_text);
 
@@ -151,50 +143,62 @@ public void actionPerformed(ActionEvent e) {
 
 class main_buttons extends JButton{
 	
-	int width;
-	int height;
-	int x_pos;
-	int y_pos;
-	String button_text;
-	
-	public main_buttons(int width, int height, int x_pos, int y_pos, String button_text) {
-            this.button_text = button_text;
-            this.width = width;
-            this.height = height;
-            this.x_pos = x_pos;
-            this.y_pos = y_pos;
+    int width;
+    int height;
+    int x_pos;
+    int y_pos;
+    String button_text;
 
-            this.setBounds(x_pos, y_pos, width, height);
-            this.setBackground(new Color(55, 150, 131));
-            this.setForeground(new Color(237, 245, 225));
-            this.setText(button_text);
-            this.setFocusable(false);
-		
-	}
-    
+    public main_buttons(int width, int height, int x_pos, int y_pos, String button_text) {
+        this.button_text = button_text;
+        this.width = width;
+        this.height = height;
+        this.x_pos = x_pos;
+        this.y_pos = y_pos;
+
+        this.setBounds(x_pos, y_pos, width, height);
+        this.setBackground(new Color(55, 150, 131));
+        this.setForeground(new Color(237, 245, 225));
+        this.setText(button_text);
+        this.setFocusable(false);
+
     }
+	
+}
 
-
-class keypad_deposit extends JPanel implements ActionListener{
+class keypad extends JPanel implements ActionListener{
 	
     String field_text = "";
     JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8 , btn9, btn0, point_btn, ok_btn;
+    JButton yes_btn, no_btn, del_btn;
     JTextField deposit_field;
+    JLabel confirm;
+    main_buttons main;
 
-    public keypad_deposit(ArrayList<String> field) {
+    public keypad(main_buttons main) {
         this.setLayout(null);
         this.setBounds(250, 100, 210, 300);
+        this.main = main;
 
+        // make a text field for the input
         deposit_field = new JTextField();
-        deposit_field.setBounds(0, 0, 210, 60);
+        deposit_field.setBounds(0, 0, 140, 60);
         deposit_field.setText(field_text);
         deposit_field.setEditable(false);
         deposit_field.setFont(new Font("Arial", Font.BOLD, 15));
 
+        // make a confirmation screen
+        confirm = new JLabel();
+        String prompt = "Do you wish to proceed?";
+        confirm.setText(prompt);
+        confirm.setVisible(false);
+        confirm.setBounds(10, 80, 210, 60);
+
+        // make buttons for the keypad
         btn1 = new JButton();
         btn1.setText("1");
         btn1.setBounds(0, 60, 70, 60);
-        btn1.addActionListener(this);
+        btn1.addActionListener(this);   
         btn2 = new JButton();
         btn2.setText("2");
         btn2.setBounds(70, 60, 70, 60);
@@ -239,6 +243,20 @@ class keypad_deposit extends JPanel implements ActionListener{
         ok_btn.setBounds(140, 240, 70, 60);
         ok_btn.setText("OK");
         ok_btn.addActionListener(this);
+        yes_btn = new JButton();
+        yes_btn.setText("Yes");
+        yes_btn.setBounds(70, 160, 70, 60);
+        yes_btn.setVisible(false);
+        yes_btn.addActionListener(this);
+        no_btn = new JButton();
+        no_btn.setText("No");
+        no_btn.setBounds(70, 230, 70, 60);
+        no_btn.setVisible(false);
+        no_btn.addActionListener(this);
+        del_btn= new JButton();
+        del_btn.setText("Del");
+        del_btn.setBounds(140, 0, 70, 60);
+        del_btn.addActionListener(this);
 
         // add buttons
         this.add(btn1);
@@ -254,47 +272,123 @@ class keypad_deposit extends JPanel implements ActionListener{
         this.add(ok_btn);
         this.add(point_btn);
         this.add(deposit_field);
+        this.add(yes_btn);
+        this.add(no_btn);
+        this.add(confirm);
+        this.add(del_btn);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btn1) {
-                field_text += "1";
+            field_text += "1";
         }
         if(e.getSource() == btn2) {
-                field_text += "2";
+            field_text += "2";
         }
         if(e.getSource() == btn3) {
-                field_text += "3";
+            field_text += "3";
         }
         if(e.getSource() == btn4) {
-                field_text += "4";
+            field_text += "4";
         }
         if(e.getSource() == btn5) {
-                field_text += "5";
+            field_text += "5";
         }
         if(e.getSource() == btn6) {
-                field_text += "6";
+            field_text += "6";
         }
         if(e.getSource() == btn7) {
-                field_text += "7";
+            field_text += "7";
         }
         if(e.getSource() == btn8) {
-                field_text += "8";
+            field_text += "8";
         }
         if(e.getSource() == btn9) {
-                field_text += "9";
+            field_text += "9";
         }
         if(e.getSource() == btn0) {
-                field_text += "0";
+            field_text += "0";
         }
         if(e.getSource() == point_btn) {
-                field_text += ".";
+            field_text += ".";
         }
-        System.out.println(field_text);
+        if(e.getSource() == ok_btn) {
+            btn0.setVisible(false);
+            btn9.setVisible(false);
+            btn8.setVisible(false);
+            btn7.setVisible(false);
+            btn6.setVisible(false);
+            btn5.setVisible(false);
+            btn4.setVisible(false);
+            btn3.setVisible(false);
+            btn2.setVisible(false);
+            btn1.setVisible(false);
+            ok_btn.setVisible(false);
+            point_btn.setVisible(false);
+            del_btn.setVisible(false);
+
+            yes_btn.setVisible(true);
+            no_btn.setVisible(true);
+            confirm.setVisible(true);
+        }
+        if(e.getSource() == del_btn) {
+            field_text = field_text.substring(0, field_text.length()-1);
+        }
+        if(e.getSource() == yes_btn) {
+            Double amt = Double.parseDouble(field_text);
+            bal.amt += amt;
+            System.out.println(bal.amt);
+
+            btn0.setVisible(true);
+            btn9.setVisible(true);
+            btn8.setVisible(true);
+            btn7.setVisible(true);
+            btn6.setVisible(true);
+            btn5.setVisible(true);
+            btn4.setVisible(true);
+            btn3.setVisible(true);
+            btn2.setVisible(true);
+            btn1.setVisible(true);
+            ok_btn.setVisible(true);
+            point_btn.setVisible(true);
+            del_btn.setVisible(true);
+
+            yes_btn.setVisible(false);
+            no_btn.setVisible(false);
+            confirm.setVisible(false);
+
+            main.doClick();
+        }
+        if(e.getSource() == no_btn) {
+            btn0.setVisible(true);
+            btn9.setVisible(true);
+            btn8.setVisible(true);
+            btn7.setVisible(true);
+            btn6.setVisible(true);
+            btn5.setVisible(true);
+            btn4.setVisible(true);
+            btn3.setVisible(true);
+            btn2.setVisible(true);
+            btn1.setVisible(true);
+            ok_btn.setVisible(true);
+            point_btn.setVisible(true);
+            del_btn.setVisible(true);
+
+            yes_btn.setVisible(false);
+            no_btn.setVisible(false);
+            confirm.setVisible(false);
+        }
+
         deposit_field.setText(field_text);
     }
 	
-	
 }
+
+class bal{
+	
+	public static Double amt = 0.0;
+
+}
+
