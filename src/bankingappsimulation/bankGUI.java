@@ -122,27 +122,31 @@ public void actionPerformed(ActionEvent e) {
         back.setVisible(true);
 
         if(e.getSource() == bal_button) {
-                curr_bal.setVisible(true);
-                curr_bal_label.setVisible(true);
+            curr_bal.setVisible(true);
+            curr_bal_label.setVisible(true);
         }
         if(e.getSource() == back) {
-                bal_button.setVisible(true);
-                withdraw.setVisible(true);
-                deposit.setVisible(true);
-                prev_transac_button.setVisible(true);
-                quit.setVisible(true);
-                back.setVisible(false);
-                curr_bal.setVisible(false);
-                curr_bal_label.setVisible(false);
-                pad.setVisible(false);
+            
+            pad.field_text = "";
+            pad.deposit_field.setText(pad.field_text);
+
+            bal_button.setVisible(true);
+            withdraw.setVisible(true);
+            deposit.setVisible(true);
+            prev_transac_button.setVisible(true);
+            quit.setVisible(true);
+            back.setVisible(false);
+            curr_bal.setVisible(false);
+            curr_bal_label.setVisible(false);
+            pad.setVisible(false);
         }
         if(e.getSource() == quit) {
-                dispose();
+            dispose();
         }
         if(e.getSource() == deposit) {
-                pad.setVisible(true);
+            pad.setVisible(true);
         }
-	}
+    }
 }
 
 class main_buttons extends JButton{
@@ -183,44 +187,58 @@ class keypad_deposit extends JPanel implements ActionListener{
 
         deposit_field = new JTextField();
         deposit_field.setBounds(0, 0, 210, 60);
+        deposit_field.setText(field_text);
         deposit_field.setEditable(false);
+        deposit_field.setFont(new Font("Arial", Font.BOLD, 15));
 
         btn1 = new JButton();
         btn1.setText("1");
         btn1.setBounds(0, 60, 70, 60);
+        btn1.addActionListener(this);
         btn2 = new JButton();
         btn2.setText("2");
         btn2.setBounds(70, 60, 70, 60);
+        btn2.addActionListener(this);
         btn3 = new JButton();
         btn3.setText("3");
         btn3.setBounds(140, 60, 70, 60);
+        btn3.addActionListener(this);
         btn4 = new JButton();
         btn4.setText("4");
         btn4.setBounds(0, 120, 70, 60);
+        btn4.addActionListener(this);
         btn5 = new JButton();
         btn5.setText("5");
         btn5.setBounds(70, 120, 70, 60);
+        btn5.addActionListener(this);
         btn6 = new JButton();
         btn6.setText("6");
         btn6.setBounds(140, 120, 70, 60);
+        btn6.addActionListener(this);
         btn7 = new JButton();
         btn7.setText("7");
         btn7.setBounds(0, 180, 70, 60);
+        btn7.addActionListener(this);
         btn8 = new JButton();
         btn8.setText("8");
         btn8.setBounds(70, 180, 70, 60);
+        btn8.addActionListener(this);
         btn9 = new JButton();
         btn9.setText("9");
         btn9.setBounds(140, 180, 70, 60);
+        btn9.addActionListener(this);
         btn0 = new JButton();
         btn0.setText("0");
         btn0.setBounds(0, 240, 70, 60);
+        btn0.addActionListener(this);
         point_btn = new JButton();
         point_btn.setText(".");
         point_btn.setBounds(70, 240, 70, 60);
+        point_btn.addActionListener(this);
         ok_btn = new JButton();
         ok_btn.setBounds(140, 240, 70, 60);
         ok_btn.setText("OK");
+        ok_btn.addActionListener(this);
 
         // add buttons
         this.add(btn1);
@@ -271,7 +289,12 @@ class keypad_deposit extends JPanel implements ActionListener{
         if(e.getSource() == btn0) {
                 field_text += "0";
         }
-
+        if(e.getSource() == point_btn) {
+                field_text += ".";
+        }
+        System.out.println(field_text);
+        deposit_field.setText(field_text);
     }
+	
 	
 }
