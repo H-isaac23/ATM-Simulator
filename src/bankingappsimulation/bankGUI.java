@@ -173,101 +173,105 @@ class main_buttons extends JButton{
 
 class keypad_deposit extends JPanel implements ActionListener{
 	
-	String field_text = "";
-	JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8 , btn9, btn0, point_btn;
-	JTextField deposit_field;
-	
-	public keypad_deposit(ArrayList<String> field) {
-		this.setLayout(null);
-		this.setBounds(250, 100, 210, 300);
-		
-		deposit_field = new JTextField();
-		deposit_field.setBounds(0, 0, 210, 60);
-		deposit_field.setEditable(false);
-		
-		btn1 = new JButton();
-		btn1.setText("1");
-		btn1.setBounds(0, 60, 70, 60);
-		btn2 = new JButton();
-		btn2.setText("2");
-		btn2.setBounds(70, 60, 70, 60);
-		btn3 = new JButton();
-		btn3.setText("3");
-		btn3.setBounds(140, 60, 70, 60);
-		btn4 = new JButton();
-		btn4.setText("4");
-		btn4.setBounds(0, 120, 70, 60);
-		btn5 = new JButton();
-		btn5.setText("5");
-		btn5.setBounds(70, 120, 70, 60);
-		btn6 = new JButton();
-		btn6.setText("6");
-		btn6.setBounds(140, 120, 70, 60);
-		btn7 = new JButton();
-		btn7.setText("7");
-		btn7.setBounds(0, 180, 70, 60);
-		btn8 = new JButton();
-		btn8.setText("8");
-		btn8.setBounds(70, 180, 70, 60);
-		btn9 = new JButton();
-		btn9.setText("9");
-		btn9.setBounds(140, 180, 70, 60);
-		btn0 = new JButton();
-		btn0.setText("0");
-		btn0.setBounds(0, 240, 70, 60);
-		point_btn = new JButton();
-		point_btn.setText(".");
-		point_btn.setBounds(70, 240, 70, 60);
-		
-		// add buttons
-		this.add(btn1);
-		this.add(btn2);
-		this.add(btn3);
-		this.add(btn4);
-		this.add(btn5);
-		this.add(btn6);
-		this.add(btn7);
-		this.add(btn8);
-		this.add(btn9);
-		this.add(btn0);
-		this.add(point_btn);
-		this.add(deposit_field);
-		
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btn1) {
-			field_text += "1";
-		}
-		if(e.getSource() == btn2) {
-			field_text += "2";
-		}
-		if(e.getSource() == btn3) {
-			field_text += "3";
-		}
-		if(e.getSource() == btn4) {
-			field_text += "4";
-		}
-		if(e.getSource() == btn5) {
-			field_text += "5";
-		}
-		if(e.getSource() == btn6) {
-			field_text += "6";
-		}
-		if(e.getSource() == btn7) {
-			field_text += "7";
-		}
-		if(e.getSource() == btn8) {
-			field_text += "8";
-		}
-		if(e.getSource() == btn9) {
-			field_text += "9";
-		}
-		if(e.getSource() == btn0) {
-			field_text += "0";
-		}
+    String field_text = "";
+    JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8 , btn9, btn0, point_btn, ok_btn;
+    JTextField deposit_field;
 
-	}
+    public keypad_deposit(ArrayList<String> field) {
+        this.setLayout(null);
+        this.setBounds(250, 100, 210, 300);
+
+        deposit_field = new JTextField();
+        deposit_field.setBounds(0, 0, 210, 60);
+        deposit_field.setEditable(false);
+
+        btn1 = new JButton();
+        btn1.setText("1");
+        btn1.setBounds(0, 60, 70, 60);
+        btn2 = new JButton();
+        btn2.setText("2");
+        btn2.setBounds(70, 60, 70, 60);
+        btn3 = new JButton();
+        btn3.setText("3");
+        btn3.setBounds(140, 60, 70, 60);
+        btn4 = new JButton();
+        btn4.setText("4");
+        btn4.setBounds(0, 120, 70, 60);
+        btn5 = new JButton();
+        btn5.setText("5");
+        btn5.setBounds(70, 120, 70, 60);
+        btn6 = new JButton();
+        btn6.setText("6");
+        btn6.setBounds(140, 120, 70, 60);
+        btn7 = new JButton();
+        btn7.setText("7");
+        btn7.setBounds(0, 180, 70, 60);
+        btn8 = new JButton();
+        btn8.setText("8");
+        btn8.setBounds(70, 180, 70, 60);
+        btn9 = new JButton();
+        btn9.setText("9");
+        btn9.setBounds(140, 180, 70, 60);
+        btn0 = new JButton();
+        btn0.setText("0");
+        btn0.setBounds(0, 240, 70, 60);
+        point_btn = new JButton();
+        point_btn.setText(".");
+        point_btn.setBounds(70, 240, 70, 60);
+        ok_btn = new JButton();
+        ok_btn.setBounds(140, 240, 70, 60);
+        ok_btn.setText("OK");
+
+        // add buttons
+        this.add(btn1);
+        this.add(btn2);
+        this.add(btn3);
+        this.add(btn4);
+        this.add(btn5);
+        this.add(btn6);
+        this.add(btn7);
+        this.add(btn8);
+        this.add(btn9);
+        this.add(btn0);
+        this.add(ok_btn);
+        this.add(point_btn);
+        this.add(deposit_field);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == btn1) {
+                field_text += "1";
+        }
+        if(e.getSource() == btn2) {
+                field_text += "2";
+        }
+        if(e.getSource() == btn3) {
+                field_text += "3";
+        }
+        if(e.getSource() == btn4) {
+                field_text += "4";
+        }
+        if(e.getSource() == btn5) {
+                field_text += "5";
+        }
+        if(e.getSource() == btn6) {
+                field_text += "6";
+        }
+        if(e.getSource() == btn7) {
+                field_text += "7";
+        }
+        if(e.getSource() == btn8) {
+                field_text += "8";
+        }
+        if(e.getSource() == btn9) {
+                field_text += "9";
+        }
+        if(e.getSource() == btn0) {
+                field_text += "0";
+        }
+
+    }
 	
 }
