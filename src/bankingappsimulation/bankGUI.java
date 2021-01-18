@@ -466,20 +466,6 @@ class keypad extends JPanel implements ActionListener{
         }
         if(e.getSource() == yes_btn) {
 
-//			btn0.setVisible(true);
-//			btn9.setVisible(true);
-//			btn8.setVisible(true);
-//			btn7.setVisible(true);
-//			btn6.setVisible(true);
-//			btn5.setVisible(true);
-//			btn4.setVisible(true);
-//			btn3.setVisible(true);
-//			btn2.setVisible(true);
-//			btn1.setVisible(true);
-//			ok_btn.setVisible(true);
-//			point_btn.setVisible(true);
-//			del_btn.setVisible(true);
-//			
             yes_btn.setVisible(false);
             no_btn.setVisible(false);
             confirm.setVisible(false);
