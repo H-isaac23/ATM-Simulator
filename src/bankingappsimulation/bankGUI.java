@@ -33,7 +33,7 @@ public class bankGUI extends JFrame implements ActionListener {
         label.setBounds(30, 0, 170, 70);
         label.setFont(new Font("Arial", Font.BOLD, 24));
         label.setForeground(new Color (255, 255, 255));
-        label.setText("Test Bank");
+        label.setText("Bank App");
 
         // make instance of main_buttons called bal_button
         bal_button = new main_buttons(100, 50, 300, 100, "Balance");
@@ -106,7 +106,7 @@ public class bankGUI extends JFrame implements ActionListener {
         this.setSize(width, height);
         this.getContentPane().setBackground(new Color(92, 219, 149)); 
         this.setVisible(true);
-        this.setTitle("ATM Simulation");
+        this.setTitle("Bank App Simulation");
 
         // add components to frame
         this.add(button_cont);
@@ -422,36 +422,39 @@ class keypad extends JPanel implements ActionListener{
             }
         }
         if(e.getSource() == ok_btn) {
-            btn0.setVisible(false);
-            btn9.setVisible(false);
-            btn8.setVisible(false);
-            btn7.setVisible(false);
-            btn6.setVisible(false);
-            btn5.setVisible(false);
-            btn4.setVisible(false);
-            btn3.setVisible(false);
-            btn2.setVisible(false);
-            btn1.setVisible(false);
-            ok_btn.setVisible(false);
-            point_btn.setVisible(false);
-            del_btn.setVisible(false);
-            main.setVisible(false);
-
             Double amt = Double.parseDouble(field_text);
+            if(amt%20 != 0){
+                JOptionPane.showMessageDialog(null, "Coins and cents are not allowed.");
+            }else{
+                btn0.setVisible(false);
+                btn9.setVisible(false);
+                btn8.setVisible(false);
+                btn7.setVisible(false);
+                btn6.setVisible(false);
+                btn5.setVisible(false);
+                btn4.setVisible(false);
+                btn3.setVisible(false);
+                btn2.setVisible(false);
+                btn1.setVisible(false);
+                ok_btn.setVisible(false);
+                point_btn.setVisible(false);
+                del_btn.setVisible(false);
+                main.setVisible(false);
 
-            if(type.equals("withdraw")) {
-                    if(amt <= bal.amt) {
-                            yes_btn.setVisible(true);
-                            no_btn.setVisible(true);
-                            confirm.setVisible(true);
-                    }else{
-                            error_msg.setVisible(true);
-                            main.setVisible(true);
-                    }
-            }else {
-                    yes_btn.setVisible(true);
-                    no_btn.setVisible(true);
-                    confirm.setVisible(true);
+                if(type.equals("withdraw")) {
+                        if(amt <= bal.amt) {
+                                yes_btn.setVisible(true);
+                                no_btn.setVisible(true);
+                                confirm.setVisible(true);
+                        }else{
+                                error_msg.setVisible(true);
+                                main.setVisible(true);
+                        }
+                }else {
+                        yes_btn.setVisible(true);
+                        no_btn.setVisible(true);
+                        confirm.setVisible(true);
+                }
             }
         }
         if(e.getSource() == del_btn) {
